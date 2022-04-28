@@ -1,0 +1,96 @@
+{% load active_link_tags %}
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-inner slimscroll">
+       <div id="sidebar-menu" class="sidebar-menu">
+         {% if user.user_type == '1' %}
+          <ul>
+             <li class="menu-title">
+                <span>Main Menu</span>
+             </li>
+             <li class ="{% active_link 'admin_home' 'active' %}">
+               <a href="{% url 'admin_home' %}"><i class="fas fa-holly-berry"></i> <span>Dashboard</span></a>
+               <li class="submenu {% active_link 'add_housekeeper' 'active' %} {% active_link 'view_housekeeper' 'active' %}"><i class=""></i>
+                  <a href="#"><i class="fa fa-home"></i> <span>Housekeeper</span> <span class="menu-arrow"></span></a>
+                  <ul>
+                     <li><a href="{% url 'add_housekeeper' %}">Add Housekeeper</a></li>
+                     <li><a href="{% url 'view_housekeeper' %}">View Housekeeper</a></li>
+                  </ul>
+               </li>
+            </li>
+             <li class="submenu {% active_link 'add_customer' 'active' %} {% active_link 'view_customer' 'active' %}">
+                <a href="#"><i class="fas fa-user"></i> <span>Customer</span> <span class="menu-arrow"></span></a>
+                <ul>
+                   <li><a href="{% url 'add_customer' %}"> Add Customer </a></li>
+                   <li><a href="{% url 'view_customer' %}">View Customer</a></li>
+                </ul>
+             </li>
+             
+             <li class="submenu {% active_link 'add_service' 'active' %} {% active_link 'view_service' 'active' %}">
+                <a href="#"><i class="fas fa-building"></i> <span> Services</span> <span class="menu-arrow"></span></a>
+                <ul>
+                  <li><a href="{% url 'add_service' %}">Service Add</a></li> 
+                  <li><a href="{% url 'view_service' %}">Service View</a></li>
+                </ul>
+             </li>
+             <li class ="{% active_link 'customer_feedback' 'active' %}">
+               <a href="{% url 'housekeeper_send_notification' %}"><i class="fa fa-comment"></i> <span>Send Housekeeper Notification</span></a>
+               </li>
+             <li class ="{% active_link 'customer_feedback' 'active' %}">
+               <a href="holiday.html"><i class="fa fa-comment"></i> <span>Customer Feedback</span></a>
+            </li>
+            <li class ="{% active_link 'feedback_housekeeper' 'active' %}">
+               <a href="{% url 'feedback_housekeeper_reply' %}"><i class="fa fa-comment"></i> <span>Housekeeper Feedback</span></a>
+            </li>
+            <li class ="{% active_link 'leave_view' 'active' %}">
+               <a href="{% url 'leave_view' %}"><i class="fas fa-envelope"></i> <span>Housekeeper Leave</span></a>
+            </li>
+            <li>
+               <a href="{% url 'logout' %}"><i class="fa fa-sign-out-alt"></i> <span>Logout</span></a>
+            </li>
+             
+          </ul>
+          {% elif user.user_type == '2' %}
+          <ul>
+            <li class="menu-title">
+               <span>Main Menu</span>
+            </li>
+            <li class ="{% active_link 'admin_home' 'active' %}">
+              <a href="{% url 'admin_home' %}"><i class="fas fa-holly-berry"></i> <span>Dashboard</span></a>
+              <li class="submenu" {% active_link 'add_housekeeper' 'active' %} {% active_link 'view_housekeeper' 'active' %}"><i class=""></i>
+                 <a href="#"><i class="fa fa-user"></i> <span>Customer</span> <span class="menu-arrow"></span></a>
+                 <ul>
+                  <li><a href="{% url 'add_housekeeper' %}">View Customer Request</a></li>
+                  <li><a href="{% url 'view_housekeeper' %}">Accept Customer Request</a></li>
+                 </li>
+
+               </ul>
+               
+               <li class ="{% active_link 'customer_feedback' 'active' %}">
+                  <a href="holiday.html"><i class="fa fa-comment"></i> <span>Customer Feedback</span></a>
+                  </li>             
+                  <li class ="{% active_link 'customer_feedback' 'active' %}">
+                     <a href="holiday.html"><i class="fa fa-briefcase"></i> <span>Customer Service </span></a>
+                     </li>             
+                     <li class ="{% active_link 'apply_leave' 'active' %}">
+                        <a href="{% url 'apply_leave' %}"><i class="fa fa-envelope"></i> <span>Apply for Leave</span></a>
+                        </li>             
+                        <li class ="{% active_link 'feedback' 'active' %}">
+                           <a href="{% url 'feedback' %}"><i class="fa fa-comments"></i> <span> Give Feedback </span></a>
+                           </li>
+                           <li>
+                              <li class ="{% active_link 'housekeeper_notification' 'active' %}">
+                                 <a href="{% url 'notification' %}"><i class="fa fa-bell"></i> <span> Notifications </span></a>
+                                 </li>
+                                 <li>
+                              
+                              <a href="{% url 'logout' %}"><i class="fa fa-sign-out-alt"></i> <span>Logout</span></a>
+                           </li>
+                                        
+                        
+          {% else %}
+
+
+      {% endif %}
+       </div>
+    </div>
+ </div>

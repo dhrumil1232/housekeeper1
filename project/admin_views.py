@@ -3,6 +3,7 @@ from multiprocessing import context
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from project.customer_views import Customer_Feedback1
 from user.models import *
 
 
@@ -17,12 +18,26 @@ def Home(request):
     customer_count = Customer.objects.all().count()
     housekeeper_count = Housekeeper.objects.all().count()
     service_count = Service.objects.all().count
-      
+    service_category_housecleaning = Service.objects.filter(category = 'House Cleaning').count()
+    service_category_officecleaning = Service.objects.filter(category = 'Office Cleaning').count()
+    service_category_other = Service.objects.filter(category = 'Other').count() 
+    housekeeper_leave_approve = Housekeeper_Leave.objects.filter(status = '1').count()     
+    housekeeper_leave_reject = Housekeeper_Leave.objects.filter(status = '2').count()      
+    housekeeper_leave_pending = Housekeeper_Leave.objects.filter(status = '0').count()
+    housekeeper_notification_readed = Housekeeper_Notification.objects.filter(status = '1').count()
+    housekeeper_notification_unreaded = Housekeeper_Notification.objects.filter(status = '0').count()      
     context ={
         'customer_count':customer_count,
         'housekeeper_count':housekeeper_count,
         'service_count':service_count,
-        
+        'service_category_housecleaning':service_category_housecleaning,
+        'service_category_officecleaning':service_category_officecleaning,
+        'service_category_other':service_category_other,
+        'housekeeper_leave_approve':housekeeper_leave_approve,
+        'housekeeper_leave_reject':housekeeper_leave_reject,
+        'housekeeper_leave_pending':housekeeper_leave_pending,
+        'housekeeper_notification_readed':housekeeper_notification_readed,
+        'housekeeper_notification_unreaded':housekeeper_notification_unreaded,
     }
     return render(request, 'Admin/home.html',context)
 @login_required(login_url='/')
@@ -377,3 +392,44 @@ def Feedback_Housekeeper_Reply_Save(request):
         feedback.save()
         messages.success(request, 'Reply sent successfully')
         return redirect('feedback_housekeeper_reply')
+    
+@login_required(login_url='/')
+def Booking_View(request):
+    booking = Book_Services.objects.all()
+    context ={
+        'booking':booking
+    }
+    return render(request,'Admin/booking_view.html',context)
+
+@login_required(login_url='/')
+def Approve_Booking(request,id):
+    booking = Book_Services.objects.get(id = id)
+    booking.status = 1
+    booking.save()
+    messages.success(request, 'Booking approved successfully')
+    return redirect('booking_view')
+@login_required(login_url='/')
+def Reject_Booking(request,id):
+    booking = Book_Services.objects.get(id = id)
+    booking.status = 2
+    booking.save()
+    messages.error(request, 'Booking rejected successfully')
+    return redirect('booking_view')
+
+@login_required(login_url='/')
+def Feedback_Customer_Reply(request):
+    customer_feedback =Customer_Feedback.objects.all()
+    context ={
+        'customer_feedback':customer_feedback
+    }
+    
+    return render(request,'Admin/feedback_customer.html',context)
+def Feedback_Customer_Reply_Save(request):
+    if request.method == 'POST':
+        feedback_id = request.POST.get('customer_feedback_id')
+        customer_feedback_reply = request.POST.get('customer_feedback_reply')
+        feedback = Customer_Feedback.objects.get(id = feedback_id)
+        feedback.customer_feedback_reply = customer_feedback_reply
+        feedback.save()
+        messages.success(request, 'Reply sent successfully')
+        return redirect('feedback_customer_reply')

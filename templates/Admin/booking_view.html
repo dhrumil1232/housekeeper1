@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="content container-fluid">
+    <div class="page-header">
+       <div class="row align-items-center">
+          <div class="col">
+            
+             <h3 class="page-title">Customer</h3>
+             <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Customer</a></li>
+                <li class="breadcrumb-item active">Booking</li>
+             </ul>
+          </div>
+          
+         
+       </div>
+    </div>
+    {% include 'include/messages.html' %}
+    <div class="row">
+       <div class="col-sm-12">
+          <div class="card card-table">
+             <div class="card-body">
+                <div class="table-responsive">
+                   <table <table id="table_id" class="table table-hover table-center mb-0 datatable">
+                      <thead>
+                         <tr>
+                            <th>ID</th>
+                            <th>  Name</th>
+                            <th>Contact</th>
+                            <th>Date</th>
+                            <th>Days</th>
+                            <th>Hours</th>
+                            <th>Address</th>                            
+                            <th class="text-right">Action</th>
+                         </tr>
+                      </thead>
+                      <tbody>
+                          {% for i in booking %}
+                         <tr>
+                            <td>{{i.id}}</td>
+                            <td>{{i.booking_name}}</td>
+                            <td>{{i.booking_contaact}}</td>
+                            
+                            <td>{{i.booking_date}}</td>
+                            <td>{{i.booking_days}}</td>
+                            <td>{{i.booking_hours}}</td>
+                            <td>{{i.booking_address}}</td>
+                            
+                            
+
+
+                            <td class="text-right">
+                               <div class="actions">
+                                {% if i.status == 0 %}
+                                <a href ="{% url 'approve_booking' i.id %}" class ="btn btn-success">Approve</a> <a href ="{% url 'reject_booking' i.id %}" class ="btn btn-danger">Reject</a>                                
+                                {% elif i.status == 1 %}
+                                <button class ="btn btn-success" disabled="disabled">Approved</a>
+                                {% else %}
+                                <button class ="btn btn-danger" disabled="disabled">Rejected</a>
+                                {% endif %} 
+                                
+                               </div>
+                            </td>
+                         </tr>
+                         {% endfor %}
+
+                         
+                      </tbody>
+                   </table>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+{% endblock content %}

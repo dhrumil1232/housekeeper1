@@ -78,3 +78,26 @@ class Housekeeper_Feedback(models.Model):
     def __str__(self):
         return self.housekeeper_id.admin.first_name + ' ' + self.housekeeper_id.admin.last_name
     
+class Book_Services(models.Model):
+    customer_id = models.ForeignKey(Customer,on_delete=models.CASCADE)
+    service_id = models.ForeignKey(Service,on_delete=models.CASCADE)
+    booking_name = models.CharField(max_length=100)
+    booking_contact =models.CharField(max_length=100) 
+    booking_date = models.CharField(max_length=100)
+    booking_days = models.CharField(max_length=100)
+    booking_hours = models.TextField()
+    booking_address = models.CharField(max_length=100)
+    status = models.IntegerField(null=True,default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.customer_id.admin.first_name + ' ' + self.customer_id.admin.last_name
+    
+class Customer_Feedback(models.Model):
+    customer_id = models.ForeignKey(Customer,on_delete=models.CASCADE)
+    customer_feedback = models.TextField()
+    customer_feedback_reply = models.TextField()
+    created_at =models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.customer_id.admin.first_name + ' ' + self.customer_id.admin.last_name

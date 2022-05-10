@@ -51,6 +51,11 @@ urlpatterns = [
     path('Admin/Housekeeper/Reject_leave,<str:id>',admin_views.Reject_Leave,name='reject_leave'),
     path('Admin/Housekeeper/Feedback',admin_views.Feedback_Housekeeper_Reply,name='feedback_housekeeper_reply'),
     path('Admin/Housekeeper/Feedback/Save',admin_views.Feedback_Housekeeper_Reply_Save,name='feedback_housekeeper_reply_save'),
+    path('Admin/Customer/Feedback',admin_views.Feedback_Customer_Reply,name='feedback_customer_reply'),
+    path('Admin/Customer/Feedback/Save',admin_views.Feedback_Customer_Reply_Save,name='feedback_customer_reply_save'),
+    path('Admin/Housekeeper/Booking_view',admin_views.Booking_View,name='booking_view'),   
+    path('Admin/Housekeeper/Approve_booking,<str:id>',admin_views.Approve_Booking,name='approve_booking'),
+    path('Admin/Housekeeper/Reject_booking,<str:id>',admin_views.Reject_Booking,name='reject_booking'),
     # this is Housekeeper Url
     path('Housekeeper/Home', housekeeper_views.Home, name='housekeeper_home'),    
     path('Housekeeper/Notification', housekeeper_views.Notification, name='notification'),
@@ -62,4 +67,13 @@ urlpatterns = [
     # this is customer panel url
     path('', customer_views.Home, name='customer_home'),
     path('Customer/Signup', customer_views.SignupCustomer, name='customer_signup'),
+    path('Customer/Save_Signup', customer_views.Save_Signup, name='customer_save_signup'),
+    path('Customer/Booking', customer_views.Service_Booking, name='customer_booking'),
+    path('Customer/Service', customer_views.Service_get, name='customer_service'),
+    path('Customer/Save_booking', customer_views.Save_booking, name='save_booking'),
+    path('Customer/AboutUs', customer_views.AboutUs, name='customer_aboutus'),
+    path('Customer/ContactUs', customer_views.ContactUs, name='customer_contactus'),
+    path('Customer/Feedback', customer_views.Customer_Feedback1, name='customer_feedback'),
+    path('Customer/Save_Feedback', customer_views.Save_Feedback_Customer, name='save_customer_feedback'),
+    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

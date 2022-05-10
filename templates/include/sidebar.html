@@ -32,18 +32,22 @@
                   <li><a href="{% url 'view_service' %}">Service View</a></li>
                 </ul>
              </li>
-             <li class ="{% active_link 'customer_feedback' 'active' %}">
+             <li class ="{% active_link 'housekeeper_send_notification' 'active' %}">
                <a href="{% url 'housekeeper_send_notification' %}"><i class="fa fa-comment"></i> <span>Send Housekeeper Notification</span></a>
                </li>
-             <li class ="{% active_link 'customer_feedback' 'active' %}">
-               <a href="holiday.html"><i class="fa fa-comment"></i> <span>Customer Feedback</span></a>
+             <li class ="{% active_link 'feedback_customer_reply' 'active' %}">
+               <a href="{% url 'feedback_customer_reply' %}"><i class="fa fa-comment"></i> <span>Customer Feedback</span></a>
             </li>
-            <li class ="{% active_link 'feedback_housekeeper' 'active' %}">
+            <li class ="{% active_link 'feedback_housekeeper_reply' 'active' %}">
                <a href="{% url 'feedback_housekeeper_reply' %}"><i class="fa fa-comment"></i> <span>Housekeeper Feedback</span></a>
             </li>
             <li class ="{% active_link 'leave_view' 'active' %}">
                <a href="{% url 'leave_view' %}"><i class="fas fa-envelope"></i> <span>Housekeeper Leave</span></a>
             </li>
+            <li class ="{% active_link 'booking_view' 'active' %}">
+               <a href="{% url 'booking_view' %}"><i class="fas fa-envelope"></i> <span>View Customer Booking</span></a>
+            </li>
+            
             <li>
                <a href="{% url 'logout' %}"><i class="fa fa-sign-out-alt"></i> <span>Logout</span></a>
             </li>
@@ -54,23 +58,7 @@
             <li class="menu-title">
                <span>Main Menu</span>
             </li>
-            <li class ="{% active_link 'admin_home' 'active' %}">
-              <a href="{% url 'admin_home' %}"><i class="fas fa-holly-berry"></i> <span>Dashboard</span></a>
-              <li class="submenu" {% active_link 'add_housekeeper' 'active' %} {% active_link 'view_housekeeper' 'active' %}"><i class=""></i>
-                 <a href="#"><i class="fa fa-user"></i> <span>Customer</span> <span class="menu-arrow"></span></a>
-                 <ul>
-                  <li><a href="{% url 'add_housekeeper' %}">View Customer Request</a></li>
-                  <li><a href="{% url 'view_housekeeper' %}">Accept Customer Request</a></li>
-                 </li>
-
-               </ul>
-               
-               <li class ="{% active_link 'customer_feedback' 'active' %}">
-                  <a href="holiday.html"><i class="fa fa-comment"></i> <span>Customer Feedback</span></a>
-                  </li>             
-                  <li class ="{% active_link 'customer_feedback' 'active' %}">
-                     <a href="holiday.html"><i class="fa fa-briefcase"></i> <span>Customer Service </span></a>
-                     </li>             
+                         
                      <li class ="{% active_link 'apply_leave' 'active' %}">
                         <a href="{% url 'apply_leave' %}"><i class="fa fa-envelope"></i> <span>Apply for Leave</span></a>
                         </li>             

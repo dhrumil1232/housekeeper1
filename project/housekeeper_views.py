@@ -2,8 +2,10 @@ from multiprocessing import context
 from django.shortcuts import render, redirect
 from user.models import *
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 def Home(request):
     return render(request, 'housekeeper/home.html')
+@login_required(login_url='/')
 def Notification(request):
     housekeeper = Housekeeper.objects.filter(admin = request.user.id)
     for i in housekeeper:
@@ -13,11 +15,13 @@ def Notification(request):
             'notification':notification,
         }
     return render(request, 'housekeeper/notification.html',context)
+@login_required(login_url='/')
 def mark_as_read(request,status):
     notification = Housekeeper_Notification.objects.get(id = status)
     notification.status = 1
     notification.save()
     return redirect('notification')
+@login_required(login_url='/')
 def Apply_Leave(request):
     housekeeper = Housekeeper.objects.filter(admin = request.user.id)
     for i in housekeeper:
@@ -28,7 +32,7 @@ def Apply_Leave(request):
         }
     
     return render(request, 'housekeeper/apply_leave.html',context)
-
+@login_required(login_url='/')
 def Save_Leave(request):
    if request.method == 'POST':
        leave_date = request.POST.get('date')
@@ -42,7 +46,7 @@ def Save_Leave(request):
        leave.save()
        messages.success(request, 'Leave applied successfully')
        return redirect('apply_leave')
-   
+@login_required(login_url='/')   
 def Feedback(request):
     housekeeper_id = Housekeeper.objects.get(admin = request.user.id)
     feedback_history = Housekeeper_Feedback.objects.filter(housekeeper_id =housekeeper_id)
@@ -50,7 +54,7 @@ def Feedback(request):
         'feedback_history':feedback_history,
     }    
     return render(request, 'housekeeper/feedback.html',context)
-
+@login_required(login_url='/')
 def Save_Feedback(request):
     if request.method == 'POST':
         housekeeper_feedback = request.POST.get('housekeeper_feedback')
